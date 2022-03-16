@@ -25,7 +25,7 @@ def api_all():
 
 
 @app.route('/v1/hazbin/gif/random', methods=['GET'])
-def api_id():
+def api_random():
 
     return jsonify(gifs[random.randint(0, 3)])
 
