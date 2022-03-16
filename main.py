@@ -12,6 +12,8 @@ gifs_database = open("gifs.json")
 
 gifs = json.loads(gifs_database.read())
 
+length = len(gifs)
+
 @app.route('/', methods=['GET'])
 def home():
     return '''<h1>Hazbin Images API</h1>
@@ -27,7 +29,7 @@ def api_all():
 @app.route('/v1/hazbin/gif/random', methods=['GET'])
 def api_random():
 
-    return jsonify(gifs[random.randint(0, 3)])
+    return jsonify(gifs[random.randint(0, length)])
 
 
 if __name__ == '__main__':
