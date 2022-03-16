@@ -11,8 +11,8 @@ api = Api(app)
 
 @app.route('/', methods=['GET'])
 def home():
-    return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
+    return '''<h1>Hazbin Images API/h1>
+<p>A silly API for fetching gifs and images I've uploaded from Hazbin Hotel/Helluva Boss shows.</p>'''
 
 
 @app.route('/api/v1/hazbin/all', methods=['GET'])
