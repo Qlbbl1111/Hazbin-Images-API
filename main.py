@@ -11,7 +11,7 @@ api = Api(app)
 
 @app.route('/', methods=['GET'])
 def home():
-    return '''<h1>Hazbin Images API/h1>
+    return '''<h1>Hazbin Images API</h1>
 <p>A silly API for fetching gifs and images I've uploaded from Hazbin Hotel/Helluva Boss shows.</p>'''
 
 
