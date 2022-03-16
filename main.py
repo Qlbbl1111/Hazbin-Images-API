@@ -1,12 +1,13 @@
 import flask
+from flask_restful import Resource, Api, reqparse
 import random
 from flask import request, jsonify
 from gifs_database import gifs
 
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
-
+#app.config["DEBUG"] = True
+api = Api(app)
 
 @app.route('/', methods=['GET'])
 def home():
@@ -24,4 +25,6 @@ def api_id():
 
     return jsonify(gifs[random.randint(0, 3)])
 
-app.run()
+
+if __name__ == '__main__':
+    app.run()
