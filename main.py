@@ -58,10 +58,10 @@ def process_form():
             j = z.get("isswim")
         return str(j)
     elif request.method == 'GET':
-    with open(f'swim.json', 'r') as f:
-        y = f.read()
-        z = json.loads(y)
-        j = z.get("isswim")
+        with open(f'swim.json', 'r') as f:
+            y = f.read()
+            z = json.loads(y)
+            j = z.get("isswim")
         return str(j)
     else:
         pass  
