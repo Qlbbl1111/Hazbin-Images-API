@@ -2,8 +2,9 @@ import json
 import flask
 from flask_restful import Resource, Api, reqparse
 import random
-from flask import request, jsonify
-
+import json
+from flask import request
+from flask import jsonify
 
 app = flask.Flask(__name__)
 #app.config["DEBUG"] = True
@@ -13,6 +14,10 @@ gifs_database = open("gifs.json")
 gifs = json.loads(gifs_database.read())
 
 length = len(gifs)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return "<h1>404</h1><p>The resource could not be found.</p>", 404
 
 @app.route('/', methods=['GET'])
 def home():
@@ -30,6 +35,29 @@ def api_all():
 def api_random():
 
     return jsonify(gifs[random.randint(0, length)])
+
+
+@app.route('/v1/swim', methods=['POST'])
+def process_form():
+    data = request.form
+    swimdata = data['swim']
+    print(swimdata)
+    if swimdata.lower() == 'true':
+        x = "true"
+        with open(f'swim.json', 'w') as f:
+            f.write(f"{{\"isswim\":{x}}}")
+    elif swimdata.lower() == 'false':
+        x = "false"
+        with open(f'swim.json', 'w') as f:
+            f.write(f"{{\"isswim\":{x}}}")
+    else:
+        pass
+    with open(f'swim.json', 'r') as f:
+        y = f.read()
+        z = json.loads(y)
+        j = z.get("isswim")
+    return str(j)
+
 
 
 if __name__ == '__main__':
