@@ -37,25 +37,34 @@ def api_random():
     return jsonify(gifs[random.randint(0, length)])
 
 
-@app.route('/v1/swim', methods=['POST'])
+@app.route('/v1/swim', methods=['POST', 'GET'])
 def process_form():
-    data = request.form
-    swimdata = data['swim']
-    if swimdata.lower() == 'true':
-        x = "true"
-        with open(f'swim.json', 'w') as f:
-            f.write(f"{{\"isswim\":{x}}}")
-    elif swimdata.lower() == 'false':
-        x = "false"
-        with open(f'swim.json', 'w') as f:
-            f.write(f"{{\"isswim\":{x}}}")
-    else:
-        pass
+    if request.method == 'POST':
+        data = request.form
+        swimdata = data['swim']
+        if swimdata.lower() == 'true':
+            x = "true"
+            with open(f'swim.json', 'w') as f:
+                f.write(f"{{\"isswim\":{x}}}")
+        elif swimdata.lower() == 'false':
+            x = "false"
+            with open(f'swim.json', 'w') as f:
+                f.write(f"{{\"isswim\":{x}}}")
+        else:
+            pass
+        with open(f'swim.json', 'r') as f:
+            y = f.read()
+            z = json.loads(y)
+            j = z.get("isswim")
+        return str(j)
+    elif request.method == 'GET':
     with open(f'swim.json', 'r') as f:
         y = f.read()
         z = json.loads(y)
         j = z.get("isswim")
-    return str(j)
+        return str(j)
+    else:
+        pass  
 
 
 
