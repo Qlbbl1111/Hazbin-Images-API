@@ -41,7 +41,6 @@ def api_random():
 def process_form():
     data = request.form
     swimdata = data['swim']
-    print(swimdata)
     if swimdata.lower() == 'true':
         x = "true"
         with open(f'swim.json', 'w') as f:
