@@ -3,11 +3,10 @@ import flask
 from flask_restful import Resource, Api, reqparse
 import random
 import json
-from flask import request
-from flask import jsonify
+from flask import jsonify, request, render_template
 
 app = flask.Flask(__name__)
-#app.config["DEBUG"] = True
+app.config["DEBUG"] = True
 api = Api(app)
 gifs_database = open("gifs.json")
 
@@ -17,12 +16,12 @@ length = len(gifs)
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return "<h1>404</h1><p>The resource could not be found.</p>", 404
+    return render_template("404.html"), 404
 
 @app.route('/', methods=['GET'])
 def home():
     return '''<h1>Hazbin Images API</h1>
-<p>A silly API for fetching gifs and images I've uploaded from Hazbin Hotel/Helluva Boss shows.</p>'''
+<p>Holy crap Lois! Qlbbl made an API!</p>'''
 
 
 @app.route('/v1/hazbin/gif/all', methods=['GET'])
